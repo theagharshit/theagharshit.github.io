@@ -7,11 +7,12 @@ import { SITE } from '../site';
 const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/eternal-logo.{svg,png}', { eager: true });
 const eternalLogo = Object.values(logos)[0]?.default;
 ---
-<Base title="About" description="Harshit Agrawal: computer science at DTU, independent operations consulting, and Associate Program Manager at Eternal from January 2027." current="about">
+<Base title="About" description="Harshit Agrawal builds AI systems with real users: LLM agents, RAG pipelines and automation. CSE at DTU, and Associate Program Manager at Eternal from January 2027." current="about">
   <section class="container about-hero">
     <div class="hero__text">
       <h1>Hi, I’m Harshit</h1>
-      <p class="lead">I study computer science at DTU. I like taking a messy business problem, getting into the numbers behind it and owning the fix end to end.</p>
+      <p class="lead">I build AI-powered systems that solve real business problems, and I see them through to deployed tools with actual users.</p>
+      <p class="about-body">I’m a computer science undergrad at DTU, but I’ve spent less time in classrooms and more time shipping: LLM agents, RAG pipelines, full-stack automation and agentic workflows that replace manual, repetitive work. I care about the full loop, from model to product to a result you can measure.</p>
       <div class="actions">
         <a class="btn" href={SITE.resumePdf}>Download resume</a>
         <a class="btn btn--line" href={SITE.linkedin} rel="noopener noreferrer">LinkedIn</a>
@@ -94,34 +95,37 @@ const eternalLogo = Object.values(logos)[0]?.default;
   </section>
 
   <section class="section container" aria-labelledby="lead-h">
-    <div class="head"><h2 id="lead-h">Leadership</h2></div>
+    <div class="head">
+      <h2 id="lead-h">Leadership that shapes how I build</h2>
+      <p>Systems thinking, stakeholder management and execution under pressure, learned in rooms full of people.</p>
+    </div>
     <div class="duo">
       <div class="card">
         <h3>Model United Nations</h3>
         <ul>
-          <li>Chairperson, organiser and delegate across 50+ conferences in India and Nepal</li>
-          <li>Ran organising committees through live multi-day events</li>
+          <li>Council Member, DelTech MUN, a conference of 400+ delegates</li>
+          <li>Chairperson, organiser and delegate across 50+ MUNs in India and Nepal</li>
           <li>Invited as a guest speaker in Mumbai</li>
         </ul>
       </div>
       <div class="card">
-        <h3>College and school</h3>
+        <h3>College, school and hackathons</h3>
         <ul>
           <li>Class Representative, DTU</li>
-          <li>Vice President, Leadership Club, and co-founder, Computer Club, at school</li>
-          <li>Winner, inter-school coding competition</li>
+          <li>Built and presented an ML project at the Smart India Hackathon</li>
+          <li>Vice President, Leadership Club, and co-founder, Computer Club, at school; winner of an inter-school coding competition</li>
         </ul>
       </div>
     </div>
   </section>
 
   <section class="container" aria-labelledby="skills-h">
-    <div class="head"><h2 id="skills-h">What I work with</h2></div>
+    <div class="head"><h2 id="skills-h">Stack I actually use</h2></div>
     <div class="skills">
-      <div><h3>Analysis</h3><ul class="tags"><li class="tag">Excel</li><li class="tag">SQL</li><li class="tag">Funnel analysis</li><li class="tag">Cohort analysis</li><li class="tag">KPI design</li><li class="tag">Root-cause analysis</li></ul></div>
-      <div><h3>Operations</h3><ul class="tags"><li class="tag">Requirement gathering</li><li class="tag">Process mapping</li><li class="tag">Inventory design</li><li class="tag">Order lifecycles</li></ul></div>
-      <div><h3>Building</h3><ul class="tags"><li class="tag">Python</li><li class="tag">Next.js</li><li class="tag">React</li><li class="tag">TypeScript</li><li class="tag">Express.js</li><li class="tag">Prisma</li><li class="tag">Postgres</li><li class="tag">n8n</li><li class="tag">GA4</li></ul></div>
-      <div><h3>People</h3><ul class="tags"><li class="tag">Client scoping</li><li class="tag">Reporting</li><li class="tag">Public speaking</li><li class="tag">English</li><li class="tag">Hindi</li></ul></div>
+      <div><h3>AI</h3><ul class="tags"><li class="tag">LLMs (OpenAI, Claude)</li><li class="tag">LangChain</li><li class="tag">RAG</li><li class="tag">Agents</li><li class="tag">Human-in-the-loop design</li></ul></div>
+      <div><h3>Building</h3><ul class="tags"><li class="tag">Python</li><li class="tag">React</li><li class="tag">Node.js</li><li class="tag">Firebase</li><li class="tag">Next.js</li><li class="tag">Postgres</li><li class="tag">REST APIs</li></ul></div>
+      <div><h3>Automation and data</h3><ul class="tags"><li class="tag">n8n</li><li class="tag">GA4</li><li class="tag">SQL</li><li class="tag">Excel</li><li class="tag">Funnel and cohort analysis</li></ul></div>
+      <div><h3>Working with people</h3><ul class="tags"><li class="tag">Client scoping</li><li class="tag">Stakeholder management</li><li class="tag">Public speaking</li><li class="tag">English</li><li class="tag">Hindi</li></ul></div>
     </div>
   </section>
   <div class="section"></div>

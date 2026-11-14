@@ -4,7 +4,8 @@ summary: An internal tool for HR records, search and reporting, replacing a spre
 kind: Internal tool
 status: Built
 stack: [React, TypeScript, Express.js]
-order: 4
+order: 7
+home: false
 ---
 
 ## What the team needed

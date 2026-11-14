@@ -1,5 +1,5 @@
 const puppeteer = require('/home/claude/portfolio2/node_modules/puppeteer-core');
-const routes = ['/', '/about/', '/work/', '/work/mahadev-ply-center/', '/work/d2c-order-and-inventory-system/', '/resume/', '/404.html'];
+const routes = ['/', '/about/', '/work/', '/work/mahadev-ply-center/', '/work/d2c-order-and-inventory-system/', '/work/ai-chef-agent/', '/resume/', '/404.html'];
 const widths = (process.argv[2] || '1440,375').split(',').map(Number);
 (async () => {
   const b = await puppeteer.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox'] });

@@ -1,6 +1,6 @@
 const puppeteer = require('/home/claude/portfolio2/node_modules/puppeteer-core');
 const axeSrc = require('fs').readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
-const routes = ['/', '/about/', '/work/', '/work/mahadev-ply-center/', '/work/d2c-order-and-inventory-system/', '/work/ga4-insights-engine/', '/work/employee-management-system/', '/resume/', '/404.html'];
+const routes = ['/', '/about/', '/work/', '/work/mahadev-ply-center/', '/work/d2c-order-and-inventory-system/', '/work/ga4-analytics-agent/', '/work/ai-chef-agent/', '/work/linkedin-post-generator-agent/', '/work/smart-india-hackathon-ml-project/', '/work/employee-management-system/', '/resume/', '/404.html'];
 (async () => {
   const b = await puppeteer.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox'] });
   let total = 0;

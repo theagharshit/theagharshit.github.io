@@ -5,8 +5,8 @@ kind: Client project
 status: In build
 year: "2026"
 stack: [Next.js, Prisma, Postgres]
-order: 2
-home: true
+order: 5
+home: false
 ---
 
 ## What the brand needed

@@ -6,7 +6,7 @@ status: Live
 year: "2026"
 stack: [Hosted on Cloudflare]
 link: https://mahadevplycenter.com.np/
-order: 1
+order: 4
 home: true
 ---
 
