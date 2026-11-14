@@ -3,7 +3,7 @@ title: ML project, Smart India Hackathon
 summary: A machine learning project built and presented at the Smart India Hackathon, a national-level competition.
 kind: Hackathon
 status: Presented
-order: 6
+order: 8
 ---
 
 ## What it was

@@ -43,6 +43,7 @@ const side = [sideA, sideB].filter(Boolean);
           <h3><a href={`/work/${feature.id}/`}>{feature.data.title}</a></h3>
           <p>{feature.data.summary}</p>
           <p class="card__domain">Shipped to real users</p>
+          {feature.data.repo && <div class="card__foot"><a class="text-link" href={feature.data.repo} rel="noopener noreferrer">View the code on GitHub</a></div>}
         </article>
       )}
       {side.map((w) => (
@@ -54,6 +55,7 @@ const side = [sideA, sideB].filter(Boolean);
           <h3><a href={`/work/${w.id}/`}>{w.data.title}</a></h3>
           <p>{w.data.summary}</p>
           {w.data.result && <p class="card__result">{w.data.result}</p>}
+          {w.data.repo && <div class="card__foot"><a class="text-link" href={w.data.repo} rel="noopener noreferrer">View code</a></div>}
         </article>
       ))}
       {wide && (

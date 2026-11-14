@@ -12,7 +12,8 @@ const work = defineCollection({
     status: z.string(),                   // e.g. "Live", "In build"
     year: z.string().optional(),          // leave out when not known
     stack: z.array(z.string()).default([]),
-    link: z.string().url().optional(),    // public link, only if the work is public
+    link: z.string().url().optional(),    // live site, only if the work is public
+    repo: z.string().url().optional(),    // public source code
     order: z.number(),                    // lower comes first
     home: z.boolean().default(false),     // show on the home page
     result: z.string().optional()         // one measured result, only if real

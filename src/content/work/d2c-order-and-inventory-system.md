@@ -5,7 +5,7 @@ kind: Client project
 status: In build
 year: "2026"
 stack: [Next.js, Prisma, Postgres]
-order: 5
+order: 6
 home: false
 ---
 

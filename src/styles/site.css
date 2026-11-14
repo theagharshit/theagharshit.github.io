@@ -208,3 +208,5 @@
 @media (max-width: 64rem) { .offers--3 { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 44rem) { .card--wide { grid-column: auto; flex-direction: column; align-items: flex-start; } }
 .about-body { color: var(--ink); max-width: 56ch; }
+.card__links { display: inline-flex; flex-wrap: wrap; gap: var(--s-4); position: relative; z-index: 1; }
+.card__links .text-link, .card__foot .text-link { position: relative; z-index: 1; }

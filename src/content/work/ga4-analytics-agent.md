@@ -1,22 +1,27 @@
 ---
 title: GA4 Analytics Agent
-summary: Automates marketing report generation end to end, from pulling GA4 data to writing the report. Built for a client.
+summary: Turns raw Google Analytics numbers into a plain-English report of what changed, why, and what to do next.
 kind: AI agent
 status: In use
-stack: [JavaScript, GA4 API, n8n]
+stack: [GA4 API, n8n, JavaScript, LLMs, Webhooks]
+repo: https://github.com/theagharshit/ai-analytics-explainer
 order: 2
 home: true
-result: About 80% less manual reporting
+result: About 80% less manual reporting for a client
 ---
 
-## What the client needed
+## What it solves
 
-Every report meant pulling numbers out of Google Analytics by hand and writing them up again.
+Marketing reports usually mean pulling numbers out of Google Analytics by hand and then explaining them to people who don't read dashboards.
 
-## What it does
+## How it works
 
-On a schedule, the agent pulls traffic and conversion metrics from GA4, works out what changed week on week and writes the summary, so the report arrives finished instead of being assembled by hand.
+1. A webhook starts a run.
+2. The agent fetches GA4 data for this week and the week before.
+3. Custom JavaScript works out the week-on-week changes.
+4. An LLM explains the trends, the likely causes and the next steps, in plain language for non-technical readers.
+5. The answer comes back as a structured response.
 
 ## Result
 
-It removed roughly 80% of the manual reporting effort.
+Built for a client, it removed roughly 80% of the manual reporting effort. The public repo is the open MVP of the same idea.
