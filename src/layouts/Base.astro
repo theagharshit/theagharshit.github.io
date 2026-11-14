@@ -1,0 +1,84 @@
+---
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/site.css';
+import { SITE } from '../site';
+
+interface Props { title?: string; description?: string; current?: 'work' | 'about' | 'resume' }
+const { title, description = SITE.description, current } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}, developer`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
+const nav = [
+  { href: '/work/', label: 'Work', key: 'work' },
+  { href: '/about/', label: 'About', key: 'about' },
+  { href: '/resume/', label: 'Resume', key: 'resume' },
+  { href: '#contact', label: 'Contact', key: 'contact' }
+];
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{fullTitle}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonical}>
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#f3eee4">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="sitemap" href="/sitemap-index.xml">
+  <link rel="preload" href="/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/hanken-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content={SITE.name}>
+  <meta property="og:title" content={fullTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Harshit Agrawal, developer">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="wordmark" href="/" aria-label="Harshit Agrawal, home">Harshit Agrawal</a>
+      <nav aria-label="Main">
+        <ul class="nav__links">
+          {nav.map((item) => (
+            <li><a href={item.href} aria-current={current === item.key ? 'page' : undefined}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__lead">
+          <h2>Get in touch</h2>
+          <p>WhatsApp or email is fastest. Delhi, working with brands in India and Nepal.</p>
+        </div>
+        <dl class="footer__links">
+          <div><dt>Email</dt><dd class="stack"><a class="btn" href={`mailto:${SITE.email}`}>Email me</a><a class="link" href={`mailto:${SITE.email}`}>{SITE.email}</a></dd></div>
+          <div><dt>WhatsApp</dt><dd><a class="link" href={SITE.whatsapp} rel="noopener noreferrer">{SITE.phone}</a></dd><dt class="dt-gap">Profiles</dt><dd><a class="link" href={SITE.linkedin} rel="noopener noreferrer">LinkedIn</a>&ensp;&ensp;<a class="link" href={SITE.github} rel="noopener noreferrer">GitHub</a></dd></div>
+        </dl>
+      </div>
+      <div class="colophon">
+        <p>Harshit Agrawal, Delhi.</p>
+        <p><a href={SITE.github} rel="noopener noreferrer">Built by me</a>, hosted on GitHub Pages.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

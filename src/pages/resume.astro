@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+---
+<Base title="Resume" description="Resume of Harshit Agrawal: B.Tech computer science at DTU, operations consulting, internships at Digibuggy and Global Help Foundation." current="resume">
+  <section class="section section--first container section--end">
+    <div class="doc-head">
+      <h1>Resume</h1>
+      <a class="btn" href={SITE.resumePdf}>Download PDF</a>
+    </div>
+
+    <article class="doc">
+      <p>B.Tech computer science student at Delhi Technological University who likes taking a messy business problem, getting into the numbers behind it, and owning the fix end to end. Comfortable in Excel and SQL, and used to working with the people who actually run operations: mapping how a process really works, finding where it leaks, and shipping something that moves the metric.</p>
+
+      <h2>Education</h2>
+      <div class="entry">
+        <div class="entry__head"><h3>Delhi Technological University, B.Tech Computer Science Engineering</h3><span>Jul 2023 to Jun 2027</span></div>
+        <p>Delhi, India. CGPA 7.87 / 10.</p>
+      </div>
+      <div class="entry">
+        <div class="entry__head"><h3>Modern Indian School, Class XII (Physics, Chemistry, Mathematics)</h3><span>2023</span></div>
+        <p>86%</p>
+      </div>
+
+      <h2>Experience</h2>
+      <div class="entry">
+        <div class="entry__head"><h3>Founder, independent analytics and operations consulting</h3><span>May 2026 to now, Delhi and remote</span></div>
+        <ul>
+          <li>Building the operations backend for a D2C apparel client: learned how the business runs day to day, then turned catalogue, per-size inventory, order fulfilment and customer queries into one self-serve system the owner runs without a developer.</li>
+          <li>Audited the live store and documented 8 operational gaps (no control over what goes live, hard-coded size and stock data, broken category navigation, no order tracking), then sequenced the fixes by revenue and customer impact rather than effort.</li>
+          <li>Designed the inventory and order flow so stock cannot oversell, every movement is logged for audit, and each order carries a full status history.</li>
+          <li>Own monthly performance reporting for a portfolio of brand clients: the KPI framework, the dashboards, and recommendations clients act on.</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <div class="entry__head"><h3>Applied AI Intern, Digibuggy Enterprise</h3><span>May to Jul 2026, Delhi</span></div>
+        <ul>
+          <li>Owned the diagnosis of a leaking lead-qualification funnel: interviewed sales and product stakeholders, mapped the process end to end, quantified drop-off at each stage, and specified the fix leadership approved and shipped on schedule.</li>
+          <li>Segmented and analysed B2B prospect data in SQL and Python to re-prioritise outbound targeting.</li>
+          <li>Automated sales-operations steps done by hand daily; ran competitive market research and turned it into go-to-market recommendations.</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <div class="entry__head"><h3>AI Technical Intern, Global Help Foundation</h3><span>May to Aug 2025, Kathmandu</span></div>
+        <ul>
+          <li>Kept registration and delegate operations running at large conferences under live event pressure.</li>
+          <li>Rebuilt how past attendees were matched to upcoming events from historical data, lifting repeat registrations 47% (30 to 44), measured before and after.</li>
+          <li>Automated manual conference workflows and reported findings to non-technical NGO stakeholders in plain language.</li>
+        </ul>
+      </div>
+
+      <h2>Projects</h2>
+      <div class="entry">
+        <div class="entry__head"><h3><a href="/work/ga4-insights-engine/">GA4 Insights Engine</a></h3><span>JavaScript, GA4 API, n8n</span></div>
+        <p>A scheduled pipeline that pulls traffic and conversion metrics, works out week-on-week variance and delivers a written summary, removing roughly 80% of manual reporting effort.</p>
+      </div>
+      <div class="entry">
+        <div class="entry__head"><h3><a href="/work/employee-management-system/">Employee Management System</a></h3><span>React, TypeScript, Express.js</span></div>
+        <p>Gathered requirements from non-technical HR users and built records, real-time search and filtering, and reporting views to replace a spreadsheet process.</p>
+      </div>
+
+      <h2>Skills</h2>
+      <dl>
+        <div><dt>Excel and SQL</dt><dd>PivotTables, XLOOKUP, INDEX-MATCH, what-if analysis, dashboards; joins, aggregations, sub-queries, window functions.</dd></div>
+        <div><dt>Analysis</dt><dd>Root-cause analysis, funnel and drop-off analysis, cohort and trend analysis, KPI definition and tracking, data cleaning.</dd></div>
+        <div><dt>Operations</dt><dd>Requirement gathering, process mapping, inventory and order-lifecycle design, prioritising by business impact.</dd></div>
+        <div><dt>Tools</dt><dd>Python (pandas, NumPy), Google Sheets, Google Analytics 4, n8n, REST APIs, Git, Notion, Slack.</dd></div>
+        <div><dt>People</dt><dd>Senior stakeholders and on-ground teams, client scoping and reporting, public speaking, English (fluent), Hindi (native).</dd></div>
+      </dl>
+
+      <h2>Leadership</h2>
+      <ul>
+        <li>Model United Nations: chairperson, organiser and delegate across 50+ conferences in India and Nepal; ran organising committees through live multi-day events; invited as a guest speaker in Mumbai.</li>
+        <li>Class Representative, DTU. At school: Vice President, Leadership Club, and co-founder, Computer Club; winner, inter-school coding competition.</li>
+      </ul>
+    </article>
+  </section>
+</Base>

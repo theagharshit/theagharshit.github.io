@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../site';
+const work = (await getCollection('work')).filter((w) => w.data.home).sort((a, b) => a.data.order - b.data.order);
+---
+<Base>
+  <section class="hero">
+    <div class="container hero__inner">
+      <h1>The screen a shop runs on</h1>
+      <div class="hero__aside">
+        <p class="lead">Admin panels for D2C brands, and white-label automation agencies resell.</p>
+        <div class="actions">
+          <a class="btn" href={SITE.whatsapp} rel="noopener noreferrer">Message on WhatsApp</a>
+          <a class="link" href="#work">See the work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--first container" id="work" aria-labelledby="work-h">
+    <div class="head-block"><h2 id="work-h">Selected work</h2></div>
+    <div class="rows">
+      {work.map((w) => (
+        <article class="row">
+          <div class="row__title">
+            <h3><a href={`/work/${w.id}/`}>{w.data.title}</a></h3>
+            <div class="row__meta">
+              {w.data.year && <span class="num">{w.data.year}</span>}
+              <span>{w.data.status}</span>
+            </div>
+          </div>
+          <p class="row__body">{w.data.summary}</p>
+          <div class="row__link">
+            {w.data.link
+              ? <a class="link" href={w.data.link} rel="noopener noreferrer">{new URL(w.data.link).hostname}</a>
+              : <span class="muted">{w.data.kind}</span>}
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="more"><a class="link" href="/work/">All work</a></p>
+  </section>
+
+  <section class="band" aria-labelledby="case-h">
+    <div class="container">
+      <div class="head-block"><h2 id="case-h">What the ply shop asked for</h2></div>
+      <table class="register">
+        <caption>Mahadev Ply Center, Lalitpur, 2026.</caption>
+        <thead>
+          <tr><th scope="col">What the owner needed</th><th scope="col">What the site does</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Customers browsing by category</th><td>Category pages, each with its own product form.</td></tr>
+          <tr><th scope="row">Updating products without a developer</th><td>The owner adds and edits products himself.</td></tr>
+          <tr><th scope="row">Enquiries straight to the shop</th><td>Every product opens a WhatsApp enquiry.</td></tr>
+          <tr><th scope="row">One person in charge of it</th><td>A single admin login on the shop’s own domain.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section container" id="build" aria-labelledby="build-h">
+    <div class="head-block"><h2 id="build-h">Two things I build</h2></div>
+    <div class="pair">
+      <div>
+        <h3>For D2C brands</h3>
+        <ul class="plain">
+          <li>Orders, stock and status on one screen</li>
+          <li>One stock count every channel reads from</li>
+          <li>WhatsApp confirmation before a COD parcel ships</li>
+        </ul>
+      </div>
+      <div>
+        <h3>For agencies, under your name</h3>
+        <ul class="plain">
+          <li>Monthly client reports from GA4 and Ads data</li>
+          <li>Lead capture and FAQ assistants for client sites</li>
+          <li>Campaign reporting and instant lead routing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--s container" aria-label="Results">
+    <div class="figures">
+      <div class="figure">
+        <p class="figure__value">80%</p>
+        <p>Less manual reporting effort for a client, after the GA4 Insights Engine went in.</p>
+      </div>
+      <div class="figure">
+        <p class="figure__value">+47%</p>
+        <p>Repeat registrations at Global Help Foundation, 30 to 44.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="who-h">
+    <div class="head-block">
+      <h2 id="who-h">Who you’d be working with</h2>
+      <p class="lead">One developer, start to finish. You talk to the person writing the code.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Based in</dt><dd>Delhi, working with brands in India and Nepal.</dd></div>
+      <div><dt>Studying</dt><dd>B.Tech in computer science at Delhi Technological University, to 2027.</dd></div>
+      <div><dt>Before this</dt><dd>Applied AI intern at Digibuggy, 2026. AI technical intern at Global Help Foundation, 2025.</dd></div>
+    </dl>
+    <p class="more"><a class="link" href="/about/">More about me</a></p>
+  </section>
+
+  <section class="band--indigo" aria-labelledby="close-h">
+    <div class="container close">
+      <div class="close__text">
+        <h2 id="close-h">Tell me what breaks first</h2>
+        <p>Send me the screen your orders go through today, and I’ll tell you what I would build first.</p>
+      </div>
+      <div class="close__action">
+        <a class="btn" href={SITE.whatsapp} rel="noopener noreferrer">Message on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</Base>

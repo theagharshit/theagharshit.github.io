@@ -1,0 +1,125 @@
+---
+import Base from '../layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import headshot from '../assets/headshot.jpg';
+import { SITE } from '../site';
+// Eternal logo: drop the official file at src/assets/eternal-logo.svg (or .png) and it appears automatically.
+const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/eternal-logo.{svg,png}', { eager: true });
+const eternalLogo = Object.values(logos)[0]?.default;
+---
+<Base title="About" description="Harshit Agrawal: computer science at DTU, independent operations consulting, and Associate Program Manager at Eternal from January 2027." current="about">
+  <section class="section section--first section--tight-end container">
+    <div class="intro">
+      <div class="intro__photo">
+        <Picture src={headshot} width={960} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(max-width: 60rem) 28rem, 40vw" alt="Harshit Agrawal in a grey blazer, outdoors" loading="eager" fetchpriority="high" />
+      </div>
+      <div class="intro__text">
+        <h1>Harshit Agrawal</h1>
+        <p class="lead">Computer science at DTU. I find where a business process leaks and build the fix.</p>
+        <div class="actions">
+          <a class="btn" href={SITE.resumePdf}>Download resume</a>
+          <a class="link" href={SITE.linkedin} rel="noopener noreferrer">LinkedIn</a>
+          <a class="link" href={SITE.github} rel="noopener noreferrer">GitHub</a>
+          <a class="link" href={`mailto:${SITE.email}`}>Email</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" aria-labelledby="next-h">
+    <h2 id="next-h" class="visually-hidden">Next role</h2>
+    <div class="next">
+      <p class="next__when">Starting January 2027</p>
+      <div class="next__org">
+        {eternalLogo && <img src={eternalLogo.src} width={eternalLogo.width} height={eternalLogo.height} alt="Eternal" />}
+        {!eternalLogo && <p class="h3-size">Eternal</p>}
+      </div>
+      <p class="next__role">Associate Program Manager (intern)</p>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="exp-h">
+    <div class="head-block"><h2 id="exp-h">Experience</h2></div>
+    <div class="rows">
+      <article class="row">
+        <div class="row__title">
+          <h3>Founder, independent consulting</h3>
+          <div class="row__meta"><span>May 2026 to now</span><span>Delhi and remote</span></div>
+        </div>
+        <div class="row__body">
+          <ul>
+            <li>Building the operations system for a D2C apparel brand: catalogue, per-size stock, fulfilment and customer queries in one place the owner runs herself.</li>
+            <li>Own monthly performance reporting for a portfolio of brand clients.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="row">
+        <div class="row__title">
+          <h3>Applied AI Intern, Digibuggy Enterprise</h3>
+          <div class="row__meta"><span>May to Jul 2026</span><span>Delhi</span></div>
+        </div>
+        <div class="row__body">
+          <ul>
+            <li>Diagnosed a leaking lead-qualification funnel and specified the fix leadership approved and shipped.</li>
+            <li>Segmented B2B prospect data in SQL and Python to re-prioritise outbound targeting.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="row">
+        <div class="row__title">
+          <h3>AI Technical Intern, Global Help Foundation</h3>
+          <div class="row__meta"><span>May to Aug 2025</span><span>Kathmandu</span></div>
+        </div>
+        <div class="row__body">
+          <ul>
+            <li>Rebuilt how past attendees were matched to upcoming events: repeat registrations up 47%, from 30 to 44.</li>
+            <li>Ran registration and delegate operations at large conferences under live pressure.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="edu-h">
+    <div class="container">
+      <div class="head-block"><h2 id="edu-h">Education</h2></div>
+      <dl class="facts">
+        <div><dt>Delhi Technological University</dt><dd>B.Tech, Computer Science Engineering, 2023 to 2027</dd></div>
+        <div><dt>CGPA</dt><dd class="figure__value figure__value--s">7.87 / 10</dd></div>
+        <div><dt>Modern Indian School</dt><dd>Class XII, Physics, Chemistry and Mathematics, 2023: 86%</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="lead-h">
+    <div class="head-block"><h2 id="lead-h">Leadership</h2></div>
+    <div class="pair">
+      <div>
+        <h3>Model United Nations</h3>
+        <ul class="plain">
+          <li>Chairperson, organiser and delegate across 50+ conferences in India and Nepal</li>
+          <li>Ran organising committees through live multi-day events</li>
+          <li>Invited as a guest speaker in Mumbai</li>
+        </ul>
+      </div>
+      <div>
+        <h3>College and school</h3>
+        <ul class="plain">
+          <li>Class Representative, DTU</li>
+          <li>Vice President, Leadership Club, and co-founder, Computer Club, at school</li>
+          <li>Winner, inter-school coding competition</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--s container section--end" aria-labelledby="skills-h">
+    <div class="head-block"><h2 id="skills-h">What I work with</h2></div>
+    <dl class="facts facts--4">
+      <div><dt>Analysis</dt><dd>Excel, SQL, funnel and cohort analysis, KPI definition, root-cause analysis</dd></div>
+      <div><dt>Operations</dt><dd>Requirement gathering, process mapping, inventory and order-lifecycle design</dd></div>
+      <div><dt>Building</dt><dd>Python, Next.js, React, TypeScript, Express.js, Prisma, Postgres, n8n, GA4</dd></div>
+      <div><dt>People</dt><dd>Client scoping and reporting, public speaking, English and Hindi</dd></div>
+    </dl>
+  </section>
+</Base>
