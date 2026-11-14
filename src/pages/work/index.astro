@@ -4,30 +4,29 @@ import { getCollection } from 'astro:content';
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 ---
 <Base title="Work" description="Client projects and tools Harshit Agrawal has built: admin panels, catalogue sites and reporting automation." current="work">
-  <section class="section section--first container">
-    <div class="head-block">
-      <h1>Work</h1>
-      <p class="lead">Client projects and internal tools, newest first. Live ones link to the real site.</p>
-    </div>
-    <div class="rows">
+  <header class="page-head container">
+    <h1>Work</h1>
+    <p class="lead">Client projects and internal tools. Live ones link to the real site.</p>
+  </header>
+  <section class="container" aria-label="Projects">
+    <div class="work">
       {work.map((w) => (
-        <article class="row">
-          <div class="row__title">
-            <h2 class="h3-size"><a href={`/work/${w.id}/`}>{w.data.title}</a></h2>
-            <div class="row__meta">
-              {w.data.year && <span class="num">{w.data.year}</span>}
-              <span>{w.data.status}</span>
-              <span>{w.data.kind}</span>
-            </div>
-          </div>
-          <p class="row__body">{w.data.summary}</p>
-          <div class="row__link">
-            {w.data.link
-              ? <a class="link" href={w.data.link} rel="noopener noreferrer">Visit site</a>
-              : <a class="link" href={`/work/${w.id}/`}>Read more</a>}
+        <article class="card card--half">
+          <ul class="tags">
+            <li class="tag tag--status">{w.data.status}</li>
+            <li class="tag">{w.data.kind}</li>
+            {w.data.year && <li class="tag">{w.data.year}</li>}
+          </ul>
+          <h2 class="card-title"><a href={`/work/${w.id}/`}>{w.data.title}</a></h2>
+          <p>{w.data.summary}</p>
+          {w.data.result && <p class="card__result">{w.data.result}</p>}
+          <div class="card__foot">
+            <span class="muted">{w.data.stack.join(', ')}</span>
+            {w.data.link && <a class="text-link" href={w.data.link} rel="noopener noreferrer">Visit site</a>}
           </div>
         </article>
       ))}
     </div>
   </section>
+  <div class="section"></div>
 </Base>

@@ -1,7 +1,7 @@
 // One place for contact details and profile links used across the site.
 export const SITE = {
   name: 'Harshit Agrawal',
-  description: 'Harshit Agrawal builds admin panels for D2C brands and white-label automation for agencies.',
+  description: 'Harshit Agrawal builds admin panels for D2C brands and white-label automation for agencies. Based in Delhi.',
   whatsapp: 'https://wa.me/918368295573',
   phone: '+91 83682 95573',
   email: 'agrawalharshit324@gmail.com',

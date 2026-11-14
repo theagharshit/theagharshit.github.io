@@ -14,7 +14,8 @@ const work = defineCollection({
     stack: z.array(z.string()).default([]),
     link: z.string().url().optional(),    // public link, only if the work is public
     order: z.number(),                    // lower comes first
-    home: z.boolean().default(false)      // show on the home page
+    home: z.boolean().default(false),     // show on the home page
+    result: z.string().optional()         // one measured result, only if real
   })
 });
 

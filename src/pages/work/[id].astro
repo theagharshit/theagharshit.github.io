@@ -11,25 +11,22 @@ const { Content } = await render(entry);
 const d = entry.data;
 ---
 <Base title={d.title} description={d.summary} current="work">
-  <section class="section section--first container">
-    <div class="project-head">
-      <p class="back"><a class="link" href="/work/">All work</a></p>
-      <h1>{d.title}</h1>
-      <p class="lead">{d.summary}</p>
-    </div>
-  </section>
-  <section class="container section--end">
-    <div class="project-body">
-      <aside aria-label="Project details">
-        <dl class="specs">
-          <div><dt>Type</dt><dd>{d.kind}</dd></div>
-          <div><dt>Status</dt><dd>{d.status}</dd></div>
-          {d.year && <div><dt>Year</dt><dd class="num">{d.year}</dd></div>}
-          {d.stack.length > 0 && <div><dt>Built with</dt><dd>{d.stack.join(', ')}</dd></div>}
-          {d.link && <div><dt>Live site</dt><dd><a class="link" href={d.link} rel="noopener noreferrer">{new URL(d.link).hostname}</a></dd></div>}
-        </dl>
-      </aside>
-      <div class="prose"><Content /></div>
-    </div>
-  </section>
+  <header class="page-head container">
+    <a class="back" href="/work/">All work</a>
+    <h1>{d.title}</h1>
+    <p class="lead">{d.summary}</p>
+  </header>
+  <div class="container project">
+    <aside aria-label="Project details" class="meta-wrap">
+      <dl class="meta">
+        <div><dt>Type</dt><dd>{d.kind}</dd></div>
+        <div><dt>Status</dt><dd>{d.status}</dd></div>
+        {d.year && <div><dt>Year</dt><dd>{d.year}</dd></div>}
+        {d.stack.length > 0 && <div><dt>Built with</dt><dd>{d.stack.join(', ')}</dd></div>}
+        {d.result && <div><dt>Result</dt><dd>{d.result}</dd></div>}
+        {d.link && <div><dt>Live site</dt><dd><a class="text-link" href={d.link} rel="noopener noreferrer">{new URL(d.link).hostname}</a></dd></div>}
+      </dl>
+    </aside>
+    <article class="prose"><Content /></article>
+  </div>
 </Base>

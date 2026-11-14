@@ -3,108 +3,110 @@ import Base from '../layouts/Base.astro';
 import { Picture } from 'astro:assets';
 import headshot from '../assets/headshot.jpg';
 import { SITE } from '../site';
-// Eternal logo: drop the official file at src/assets/eternal-logo.svg (or .png) and it appears automatically.
+// Eternal logo: save the official file as src/assets/eternal-logo.svg (or .png) and it appears automatically.
 const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/eternal-logo.{svg,png}', { eager: true });
 const eternalLogo = Object.values(logos)[0]?.default;
 ---
 <Base title="About" description="Harshit Agrawal: computer science at DTU, independent operations consulting, and Associate Program Manager at Eternal from January 2027." current="about">
-  <section class="section section--first section--tight-end container">
-    <div class="intro">
-      <div class="intro__photo">
-        <Picture src={headshot} width={960} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(max-width: 60rem) 28rem, 40vw" alt="Harshit Agrawal in a grey blazer, outdoors" loading="eager" fetchpriority="high" />
-      </div>
-      <div class="intro__text">
-        <h1>Harshit Agrawal</h1>
-        <p class="lead">Computer science at DTU. I find where a business process leaks and build the fix.</p>
-        <div class="actions">
-          <a class="btn" href={SITE.resumePdf}>Download resume</a>
-          <a class="link" href={SITE.linkedin} rel="noopener noreferrer">LinkedIn</a>
-          <a class="link" href={SITE.github} rel="noopener noreferrer">GitHub</a>
-          <a class="link" href={`mailto:${SITE.email}`}>Email</a>
-        </div>
+  <section class="container about-hero">
+    <div class="hero__text">
+      <h1>Hi, I’m Harshit</h1>
+      <p class="lead">I study computer science at DTU. I like taking a messy business problem, getting into the numbers behind it and owning the fix end to end.</p>
+      <div class="actions">
+        <a class="btn" href={SITE.resumePdf}>Download resume</a>
+        <a class="btn btn--line" href={SITE.linkedin} rel="noopener noreferrer">LinkedIn</a>
+        <a class="btn btn--line" href={SITE.github} rel="noopener noreferrer">GitHub</a>
       </div>
     </div>
+    <figure class="portrait">
+      <Picture src={headshot} width={900} formats={['avif', 'webp']} widths={[420, 640, 900]} sizes="(max-width: 64rem) 30rem, 30vw" alt="Harshit Agrawal" loading="eager" fetchpriority="high" />
+    </figure>
   </section>
 
   <section class="container" aria-labelledby="next-h">
-    <h2 id="next-h" class="visually-hidden">Next role</h2>
     <div class="next">
-      <p class="next__when">Starting January 2027</p>
-      <div class="next__org">
-        {eternalLogo && <img src={eternalLogo.src} width={eternalLogo.width} height={eternalLogo.height} alt="Eternal" />}
-        {!eternalLogo && <p class="h3-size">Eternal</p>}
+      <div class="next__logo">
+        {eternalLogo
+          ? <img src={eternalLogo.src} width={eternalLogo.width} height={eternalLogo.height} alt="Eternal" />
+          : <span aria-hidden="true">E</span>}
       </div>
-      <p class="next__role">Associate Program Manager (intern)</p>
+      <div>
+        <h2 id="next-h">Joining Eternal</h2>
+        <p>Associate Program Manager (intern)</p>
+      </div>
+      <p class="tag tag--status">Starting January 2027</p>
     </div>
   </section>
 
   <section class="section container" aria-labelledby="exp-h">
-    <div class="head-block"><h2 id="exp-h">Experience</h2></div>
-    <div class="rows">
-      <article class="row">
-        <div class="row__title">
+    <div class="head"><h2 id="exp-h">Experience</h2></div>
+    <ol class="timeline">
+      <li>
+        <p class="when">May 2026 to now<br>Delhi and remote</p>
+        <div>
           <h3>Founder, independent consulting</h3>
-          <div class="row__meta"><span>May 2026 to now</span><span>Delhi and remote</span></div>
-        </div>
-        <div class="row__body">
           <ul>
             <li>Building the operations system for a D2C apparel brand: catalogue, per-size stock, fulfilment and customer queries in one place the owner runs herself.</li>
+            <li>Audited the live store, documented 8 operational gaps and sequenced the fixes by revenue and customer impact.</li>
             <li>Own monthly performance reporting for a portfolio of brand clients.</li>
           </ul>
         </div>
-      </article>
-      <article class="row">
-        <div class="row__title">
+      </li>
+      <li>
+        <p class="when">May to Jul 2026<br>Delhi</p>
+        <div>
           <h3>Applied AI Intern, Digibuggy Enterprise</h3>
-          <div class="row__meta"><span>May to Jul 2026</span><span>Delhi</span></div>
-        </div>
-        <div class="row__body">
           <ul>
             <li>Diagnosed a leaking lead-qualification funnel and specified the fix leadership approved and shipped.</li>
             <li>Segmented B2B prospect data in SQL and Python to re-prioritise outbound targeting.</li>
+            <li>Automated daily manual sales-operations steps.</li>
           </ul>
         </div>
-      </article>
-      <article class="row">
-        <div class="row__title">
+      </li>
+      <li>
+        <p class="when">May to Aug 2025<br>Kathmandu</p>
+        <div>
           <h3>AI Technical Intern, Global Help Foundation</h3>
-          <div class="row__meta"><span>May to Aug 2025</span><span>Kathmandu</span></div>
-        </div>
-        <div class="row__body">
           <ul>
             <li>Rebuilt how past attendees were matched to upcoming events: repeat registrations up 47%, from 30 to 44.</li>
             <li>Ran registration and delegate operations at large conferences under live pressure.</li>
+            <li>Automated manual conference workflows and reported to non-technical NGO stakeholders.</li>
           </ul>
         </div>
-      </article>
-    </div>
+      </li>
+    </ol>
   </section>
 
-  <section class="band" aria-labelledby="edu-h">
-    <div class="container">
-      <div class="head-block"><h2 id="edu-h">Education</h2></div>
-      <dl class="facts">
-        <div><dt>Delhi Technological University</dt><dd>B.Tech, Computer Science Engineering, 2023 to 2027</dd></div>
-        <div><dt>CGPA</dt><dd class="figure__value figure__value--s">7.87 / 10</dd></div>
-        <div><dt>Modern Indian School</dt><dd>Class XII, Physics, Chemistry and Mathematics, 2023: 86%</dd></div>
-      </dl>
+  <section class="container" aria-labelledby="edu-h">
+    <div class="head"><h2 id="edu-h">Education</h2></div>
+    <div class="duo">
+      <div class="card">
+        <h3>Delhi Technological University</h3>
+        <p>B.Tech, Computer Science Engineering, 2023 to 2027</p>
+        <p class="big-num">CGPA 7.87 / 10</p>
+      </div>
+      <div class="card">
+        <h3>Modern Indian School</h3>
+        <p>Class XII, Physics, Chemistry and Mathematics, 2023</p>
+        <p class="big-num">86%</p>
+      </div>
     </div>
   </section>
 
   <section class="section container" aria-labelledby="lead-h">
-    <div class="head-block"><h2 id="lead-h">Leadership</h2></div>
-    <div class="pair">
-      <div>
+    <div class="head"><h2 id="lead-h">Leadership</h2></div>
+    <div class="duo">
+      <div class="card">
         <h3>Model United Nations</h3>
-        <ul class="plain">
+        <ul>
           <li>Chairperson, organiser and delegate across 50+ conferences in India and Nepal</li>
           <li>Ran organising committees through live multi-day events</li>
           <li>Invited as a guest speaker in Mumbai</li>
         </ul>
       </div>
-      <div>
+      <div class="card">
         <h3>College and school</h3>
-        <ul class="plain">
+        <ul>
           <li>Class Representative, DTU</li>
           <li>Vice President, Leadership Club, and co-founder, Computer Club, at school</li>
           <li>Winner, inter-school coding competition</li>
@@ -113,13 +115,14 @@ const eternalLogo = Object.values(logos)[0]?.default;
     </div>
   </section>
 
-  <section class="section--s container section--end" aria-labelledby="skills-h">
-    <div class="head-block"><h2 id="skills-h">What I work with</h2></div>
-    <dl class="facts facts--4">
-      <div><dt>Analysis</dt><dd>Excel, SQL, funnel and cohort analysis, KPI definition, root-cause analysis</dd></div>
-      <div><dt>Operations</dt><dd>Requirement gathering, process mapping, inventory and order-lifecycle design</dd></div>
-      <div><dt>Building</dt><dd>Python, Next.js, React, TypeScript, Express.js, Prisma, Postgres, n8n, GA4</dd></div>
-      <div><dt>People</dt><dd>Client scoping and reporting, public speaking, English and Hindi</dd></div>
-    </dl>
+  <section class="container" aria-labelledby="skills-h">
+    <div class="head"><h2 id="skills-h">What I work with</h2></div>
+    <div class="skills">
+      <div><h3>Analysis</h3><ul class="tags"><li class="tag">Excel</li><li class="tag">SQL</li><li class="tag">Funnel analysis</li><li class="tag">Cohort analysis</li><li class="tag">KPI design</li><li class="tag">Root-cause analysis</li></ul></div>
+      <div><h3>Operations</h3><ul class="tags"><li class="tag">Requirement gathering</li><li class="tag">Process mapping</li><li class="tag">Inventory design</li><li class="tag">Order lifecycles</li></ul></div>
+      <div><h3>Building</h3><ul class="tags"><li class="tag">Python</li><li class="tag">Next.js</li><li class="tag">React</li><li class="tag">TypeScript</li><li class="tag">Express.js</li><li class="tag">Prisma</li><li class="tag">Postgres</li><li class="tag">n8n</li><li class="tag">GA4</li></ul></div>
+      <div><h3>People</h3><ul class="tags"><li class="tag">Client scoping</li><li class="tag">Reporting</li><li class="tag">Public speaking</li><li class="tag">English</li><li class="tag">Hindi</li></ul></div>
+    </div>
   </section>
+  <div class="section"></div>
 </Base>

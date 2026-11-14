@@ -1,21 +1,41 @@
 :root {
   color-scheme: light;
-  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
-  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
-  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
-  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
-  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
-  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
-  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  --color-paper: oklch(95.5% 0.014 85); --color-paper-2: oklch(92% 0.022 84); --color-paper-3: oklch(85% 0.032 80);
-  --color-ink: oklch(21% 0.012 60); --color-ink-2: oklch(31% 0.012 60); --color-muted: oklch(46% 0.014 62);
-  --color-rule: oklch(83% 0.022 84); --color-rule-ink: oklch(21% 0.012 60);
-  --color-accent: oklch(34% 0.115 267); --color-accent-2: oklch(43% 0.125 267); --color-accent-ink: oklch(95.5% 0.014 85); --color-focus: oklch(43% 0.15 267);
-  --font-display: "Libre Caslon Display", "Libre Caslon Text", ui-serif, Georgia, serif; --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-outlier: "DM Mono", ui-monospace, monospace;
-  --radius-card: 0; --radius-pill: 0; --rule-hair: 1px; --rule-ink: 2px;
-  --shadow-card: none;
-  --tracking-display: -0.01em; --display-weight: 400;
+
+  /* colour: white page, black type, one cobalt */
+  --white: #ffffff;
+  --black: #000000;
+  --ink: #1d1f24;          /* body text */
+  --muted: #5d6370;        /* secondary text, 6.1:1 on white */
+  --cloud: #f3f4f7;        /* card and panel fill */
+  --line: #e2e4ea;         /* borders */
+  --cobalt: #1f3bff;       /* the one colour: buttons, the agency panel, focus */
+  --cobalt-deep: #142ad1;  /* pressed and hover */
+  --cobalt-tint: #e9ecff;  /* tag fill on white */
+
+  /* type */
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: clamp(1.5rem, 1.1rem + 1vw, 1.875rem);
+  --step-3: clamp(2rem, 1.3rem + 2.2vw, 3rem);
+  --step-4: clamp(2.75rem, 1.6rem + 4vw, 4.75rem);
+  --step-5: clamp(3.25rem, 1.4rem + 6.4vw, 7.5rem);
+
+  /* space */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px;
+  --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 144px;
+
+  /* shape: radius steps by size of the thing */
+  --r-pill: 999px;
+  --r-tag: 8px;
+  --r-card: 20px;
+  --r-panel: 32px;
+
+  --container: 1280px;
+  --gutter: clamp(20px, 4vw, 48px);
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }

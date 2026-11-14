@@ -6,6 +6,7 @@ status: In use
 stack: [JavaScript, GA4 API, n8n]
 order: 3
 home: true
+result: About 80% less manual reporting
 ---
 
 ## What the client needed
