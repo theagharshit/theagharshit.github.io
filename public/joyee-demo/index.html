@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A demo orders desk made for Joyee, Kolkata. Sample data only.">
+<title>Joyee orders desk (demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Figtree:wght@400;500;600&display=swap">
+<style>
+:root{
+  --kora:#F7F1E6;      /* unbleached cotton */
+  --paper:#FFFCF6;
+  --alta:#8A1C24;      /* deep red */
+  --alta-soft:#F3E1DC;
+  --zari:#B48B3C;      /* gold thread */
+  --ink:#2B1F1B;
+  --muted:#76665D;
+  --line:#E6DBC9;
+  --leaf:#3F6B4A;
+  --serif:"Bodoni Moda", Georgia, serif;
+  --sans:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#EDE4D3;color:var(--ink);font:400 15px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--alta);outline-offset:2px}
+
+.app{max-width:480px;min-height:100vh;margin:0 auto;background:var(--kora);position:relative;padding-bottom:84px;box-shadow:0 0 0 1px var(--line)}
+
+/* the woven border: the one decorative moment */
+.border-weave{height:14px;background:
+  repeating-linear-gradient(90deg,var(--zari) 0 2px,transparent 2px 10px) 0 4px/100% 2px no-repeat,
+  repeating-linear-gradient(90deg,var(--zari) 0 2px,transparent 2px 10px) 5px 9px/100% 2px no-repeat,
+  linear-gradient(var(--alta),var(--alta))}
+
+header{padding:18px 20px 6px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.wordmark{font:italic 500 34px/1 var(--serif);letter-spacing:.01em;color:var(--alta);margin:0}
+.desk{font-size:13px;color:var(--muted);text-align:right}
+.tag{display:inline-block;margin-top:2px;font-size:11px;padding:2px 8px;border:1px solid var(--line);border-radius:20px;background:var(--paper)}
+
+main{padding:4px 20px 24px}
+h2{font:500 26px/1.15 var(--serif);margin:14px 0 4px}
+.lede{margin:0 0 16px;color:var(--muted)}
+
+.try{display:flex;gap:12px;align-items:center;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--alta);border-radius:10px;padding:12px 14px;margin-bottom:18px}
+.try p{margin:0;font-size:14px;flex:1}
+.btn{border:0;border-radius:8px;padding:11px 16px;font-weight:600;background:var(--alta);color:#fff;white-space:nowrap}
+.btn:disabled{background:#CBBFB2;color:#fff;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--alta);border:1px solid var(--alta)}
+.btn.wa{background:#1F7A4D}
+.btn.block{width:100%;padding:14px}
+a.btn{display:block;text-align:center;text-decoration:none}
+
+.filters{display:flex;gap:8px;overflow-x:auto;margin:0 -20px 12px;padding:0 20px 2px;scrollbar-width:none}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 12px;font-size:13px;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--kora)}
+
+.list{list-style:none;margin:0;padding:0}
+.order{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:14px 0}
+.order .who{font-weight:600}
+.order .what{font-size:13px;color:var(--muted);line-height:1.35}
+.order .right{text-align:right;font-size:13px}
+.order .amt{font-weight:600;display:block}
+.order.fresh{animation:fresh 2.4s ease-out}
+@keyframes fresh{0%{background:var(--alta-soft)}100%{background:transparent}}
+
+.thumb{width:44px;height:54px;border-radius:4px}
+.src{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:4px;margin-right:4px;vertical-align:1px}
+.src.web{background:#E6ECF3;color:#28466B}
+.src.store{background:#F0E6D2;color:#6E5320}
+.status{display:inline-block;margin-top:4px;font-size:12px;font-weight:600}
+.s-Paid{color:var(--alta)} .s-Packed{color:#9A6A12} .s-Shipped{color:#28466B} .s-Delivered{color:var(--leaf)}
+
+/* swatches: each saree drawn as cloth, body + border + zari line */
+.swatch{position:relative;overflow:hidden;background:
+  linear-gradient(to bottom,transparent 72%,var(--z) 72% 74%,var(--r) 74% 92%,var(--z) 92% 94%,var(--r) 94%),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),
+  repeating-linear-gradient(90deg,rgba(0,0,0,.06) 0 1px,transparent 1px 3px),
+  var(--b)}
+.swatch.motif::after{content:"";position:absolute;inset:8% 10% 32%;background:radial-gradient(circle,var(--z) 1.4px,transparent 1.8px) 0 0/16px 16px;opacity:.75}
+.thumb.swatch.motif::after{background-size:9px 9px}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.piece{background:none;border:0;padding:0;text-align:left}
+.piece .swatch{aspect-ratio:4/5;border-radius:6px}
+.piece .name{font-weight:600;font-size:14px;margin-top:8px;line-height:1.3}
+.piece .meta{font-size:13px;color:var(--muted)}
+.stamp{position:absolute;z-index:2;left:50%;top:40%;transform:translate(-50%,-50%) rotate(-12deg);font:600 18px/1 var(--serif);letter-spacing:.12em;color:#fff;background:var(--alta);padding:6px 12px;border:2px solid #fff;outline:2px solid var(--alta)}
+.piece.sold .swatch{filter:saturate(.6) brightness(.95)}
+.stamp.pop{animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{0%{transform:translate(-50%,-50%) rotate(-12deg) scale(2.2);opacity:0}100%{transform:translate(-50%,-50%) rotate(-12deg) scale(1);opacity:1}}
+
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;display:grid;grid-template-columns:1fr 1fr;background:var(--paper);border-top:1px solid var(--line);padding:6px 10px calc(8px + env(safe-area-inset-bottom));z-index:5}
+nav button{background:none;border:0;padding:10px;border-radius:8px;font-weight:600;color:var(--muted)}
+nav button[aria-current="page"]{color:var(--alta);background:var(--alta-soft)}
+
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(43,31,27,.45);display:none;z-index:10}
+.scrim.open{display:block}
+.sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,100%);width:100%;max-width:480px;max-height:88vh;overflow:auto;background:var(--paper);border-radius:16px 16px 0 0;padding:10px 20px calc(22px + env(safe-area-inset-bottom));z-index:11;transition:transform .28s ease}
+.sheet.open{transform:translate(-50%,0)}
+.grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 12px}
+.sheet h3{font:500 24px/1.2 var(--serif);margin:6px 0 2px}
+.sheet .sub{color:var(--muted);margin:0 0 14px;font-size:14px}
+.close{position:absolute;right:14px;top:12px;background:none;border:0;font-size:22px;line-height:1;padding:6px;color:var(--muted)}
+.hero-swatch{height:140px;border-radius:8px;margin-bottom:12px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0 0 16px;font-size:14px}
+dt{color:var(--muted)} dd{margin:0}
+
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin:6px 0 18px;padding:0;counter-reset:s}
+.steps li{position:relative;text-align:center;font-size:12px;color:var(--muted);padding-top:30px}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);display:grid;place-items:center;font-size:12px;font-weight:600;z-index:1}
+.steps li::after{content:"";position:absolute;top:11px;left:-50%;width:100%;height:2px;background:var(--line)}
+.steps li:first-child::after{display:none}
+.steps li.done{color:var(--ink);font-weight:600}
+.steps li.done::before{background:var(--alta);border-color:var(--alta);color:#fff;content:"✓"}
+.steps li.done::after{background:var(--alta)}
+
+.field{display:block;margin-bottom:12px;font-size:13px;color:var(--muted)}
+.field input{display:block;width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font-size:15px}
+.stack{display:grid;gap:10px}
+
+.notice{border-radius:8px;padding:12px 14px;font-size:14px;margin-bottom:14px}
+.notice.stop{background:var(--alta-soft);color:var(--alta);border:1px solid #E5C2BB}
+.notice.ok{background:#E5EEE6;color:var(--leaf)}
+
+.bubble-wrap{background:#E9DFD0;border-radius:10px;padding:16px 14px;margin-bottom:14px}
+.bubble{background:#D9F7C9;border-radius:10px 10px 2px 10px;padding:10px 12px;white-space:pre-line;font-size:14px;max-width:92%;margin-left:auto;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+
+.toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,20px);opacity:0;width:calc(100% - 32px);max-width:448px;background:var(--ink);color:var(--kora);border-radius:10px;padding:12px 14px;font-size:14px;display:flex;gap:12px;align-items:center;z-index:20;transition:.25s ease;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.toast p{margin:0;flex:1}
+.toast button{background:none;border:0;color:#F2C9A0;font-weight:600;padding:4px}
+
+.empty{color:var(--muted);padding:24px 0;text-align:center}
+[hidden]{display:none !important}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="border-weave"></div>
+  <header>
+    <h1 class="wordmark">joyee</h1>
+    <div class="desk">Orders desk<br><span class="tag">Demo with sample data</span></div>
+  </header>
+
+  <main>
+    <section id="view-orders" aria-labelledby="orders-title">
+      <h2 id="orders-title">Orders</h2>
+      <p class="lede" id="summary"></p>
+      <div class="try">
+        <p id="try-text">Watch a website order come in.</p>
+        <button class="btn" type="button" id="simulate">Simulate website order</button>
+      </div>
+      <div class="filters" role="group" aria-label="Filter orders">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-f="Paid" aria-pressed="false">To pack</button>
+        <button class="chip" type="button" data-f="Packed" aria-pressed="false">To ship</button>
+        <button class="chip" type="button" data-f="Shipped" aria-pressed="false">On the way</button>
+        <button class="chip" type="button" data-f="Delivered" aria-pressed="false">Delivered</button>
+      </div>
+      <ul class="list" id="orders"></ul>
+    </section>
+
+    <section id="view-stock" aria-labelledby="stock-title" hidden>
+      <h2 id="stock-title">Sarees</h2>
+      <p class="lede" id="stock-summary"></p>
+      <div class="filters" role="group" aria-label="Filter sarees">
+        <button class="chip" type="button" data-s="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-s="available" aria-pressed="false">Available</button>
+        <button class="chip" type="button" data-s="sold" aria-pressed="false">Sold</button>
+      </div>
+      <div class="grid" id="stock"></div>
+    </section>
+  </main>
+
+  <nav aria-label="Sections">
+    <button type="button" data-view="orders" aria-current="page" id="tab-orders">Orders</button>
+    <button type="button" data-view="stock" id="tab-stock">Sarees</button>
+  </nav>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+  <div class="grab"></div>
+  <button class="close" type="button" id="close" aria-label="Close">×</button>
+  <div id="sheet-body"></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><p id="toast-text"></p><button type="button" id="toast-btn">See sarees</button></div>
+
+<script>
+const SAREES = [
+  {id:1, name:"Peacock blue Kanjeevaram", weave:"Kanjeevaram silk, korvai border", price:68500, b:"#1F4E79", r:"#8A1C24", z:"#D4AF5A", motif:true},
+  {id:2, name:"Rani pink Kadhua Banarasi", weave:"Banarasi silk, kadhua weave", price:54000, b:"#B8235A", r:"#7A1438", z:"#E8C46A", motif:true},
+  {id:3, name:"Off-white Dhakai Jamdani", weave:"Jamdani, fine cotton", price:22800, b:"#EFE6D2", r:"#A3262A", z:"#C9A44C", motif:true},
+  {id:4, name:"Mint Chanderi with zari buta", weave:"Chanderi silk-cotton", price:18900, b:"#A9C8B1", r:"#6E8F76", z:"#C9A44C", motif:true},
+  {id:5, name:"Natural Tussar Ghicha", weave:"Tussar silk, ghicha pallu", price:24500, b:"#C9A36B", r:"#6E2A1F", z:"#E5CD95", motif:false},
+  {id:6, name:"Midnight Katan Banarasi", weave:"Katan silk, gold zari", price:94000, b:"#211C2B", r:"#3A2F45", z:"#C9A44C", motif:true},
+  {id:7, name:"Mustard Kanjeevaram, green border", weave:"Kanjeevaram silk", price:72000, b:"#D19A1C", r:"#2F5D3A", z:"#E8C46A", motif:false},
+  {id:8, name:"Indigo Jamdani", weave:"Jamdani, handspun cotton", price:27500, b:"#2E3A6E", r:"#1E2650", z:"#E8E2D0", motif:true},
+  {id:9, name:"Emerald Tanchoi Banarasi", weave:"Banarasi silk, tanchoi", price:61000, b:"#1E6B52", r:"#124636", z:"#C9A44C", motif:true},
+  {id:10, name:"Blush Chanderi", weave:"Chanderi silk", price:19800, b:"#E5B7AE", r:"#B9786E", z:"#C9A44C", motif:true},
+  {id:11, name:"Rust Tussar Kantha", weave:"Tussar silk, kantha stitch", price:33000, b:"#A0522D", r:"#F1E3C6", z:"#F1E3C6", motif:true},
+  {id:12, name:"Lilac Kanjeevaram, temple border", weave:"Kanjeevaram silk", price:58000, b:"#9B7BB4", r:"#7A1F3D", z:"#D4AF5A", motif:false}
+];
+
+let seq = 2049;
+const ORDERS = [
+  {no:"JY-2048", saree:5, who:"Ananya Sen", place:"Bengaluru, India", src:"Website", status:"Paid", when:"Today, 11:42am"},
+  {no:"JY-2047", saree:10, who:"Meera Iyer", place:"Singapore", src:"Website", status:"Paid", when:"Today, 9:15am"},
+  {no:"JY-2046", saree:7, who:"Shalini Das", place:"Dubai, UAE", src:"Website", status:"Packed", when:"Yesterday, 6:30pm"},
+  {no:"JY-2045", saree:6, who:"Rhea Kapoor", place:"London, UK", src:"Website", status:"Shipped", when:"17 Nov", courier:"DHL Express", awb:"7731 2290 45"},
+  {no:"JY-2044", saree:8, who:"Nandini Rao", place:"New Jersey, USA", src:"Website", status:"Shipped", when:"16 Nov", courier:"DHL Express", awb:"7731 1984 02"},
+  {no:"JY-2043", saree:3, who:"Ishita Ghosh", place:"Harish Mukherjee Road store", src:"Store", status:"Delivered", when:"15 Nov"},
+  {no:"JY-2042", saree:9, who:"Priya Raman", place:"Chennai, India", src:"Website", status:"Delivered", when:"13 Nov", courier:"Blue Dart", awb:"8820 4471 63"},
+  {no:"JY-2041", saree:2, who:"Debolina Roy", place:"Harish Mukherjee Road store", src:"Store", status:"Delivered", when:"12 Nov"}
+];
+const SOLD = {}; ORDERS.forEach(o => SOLD[o.saree] = o.no);
+
+const BUYERS = [
+  {who:"Aditi Chatterjee", place:"Toronto, Canada"},
+  {who:"Kavya Menon", place:"Mumbai, India"},
+  {who:"Sohini Basu", place:"Sydney, Australia"},
+  {who:"Tara Malhotra", place:"New Delhi, India"}
+];
+const STEPS = ["Paid","Packed","Shipped","Delivered"];
+const $ = s => document.querySelector(s);
+const rupees = n => "₹" + n.toLocaleString("en-IN");
+const sareeOf = id => SAREES.find(s => s.id === id);
+const orderOf = no => ORDERS.find(o => o.no === no);
+const intl = o => !/India|store/.test(o.place);
+let orderFilter = "all", stockFilter = "all", freshNo = null, popId = null;
+
+function paint(el, s){
+  el.classList.add("swatch"); if (s.motif) el.classList.add("motif");
+  el.style.setProperty("--b", s.b); el.style.setProperty("--r", s.r); el.style.setProperty("--z", s.z);
+}
+function el(tag, cls, text){ const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+function renderOrders(){
+  const toPack = ORDERS.filter(o => o.status === "Paid").length;
+  const toShip = ORDERS.filter(o => o.status === "Packed").length;
+  const web = ORDERS.filter(o => o.src === "Website").length;
+  $("#summary").textContent = `${toPack} to pack and ${toShip} to ship. ${web} of ${ORDERS.length} orders came from the website.`;
+  const ul = $("#orders"); ul.innerHTML = "";
+  const list = ORDERS.filter(o => orderFilter === "all" || o.status === orderFilter);
+  if (!list.length){ ul.append(el("li","empty","Nothing here right now.")); return; }
+  list.forEach(o => {
+    const s = sareeOf(o.saree);
+    const li = el("li"); const b = el("button", "order" + (o.no === freshNo ? " fresh" : "")); b.type = "button";
+    const t = el("div","thumb"); paint(t, s);
+    const mid = el("div"); mid.append(el("div","who",o.who));
+    const what = el("div","what"); const src = el("span","src " + (o.src === "Website" ? "web" : "store"), o.src);
+    what.append(src, document.createTextNode(s.name)); what.append(el("br")); what.append(document.createTextNode(o.place));
+    mid.append(what);
+    const right = el("div","right"); right.append(el("span","amt",rupees(s.price)), el("span","status s-" + o.status, o.status));
+    b.append(t, mid, right); b.addEventListener("click", () => openOrder(o.no));
+    li.append(b); ul.append(li);
+  });
+}
+
+function renderStock(){
+  const avail = SAREES.filter(s => !SOLD[s.id]).length;
+  $("#stock-summary").textContent = `Every saree is a single piece. ${avail} available, ${SAREES.length - avail} sold. A sold saree can't be sold again, online or in the store.`;
+  const g = $("#stock"); g.innerHTML = "";
+  SAREES.filter(s => stockFilter === "all" || (stockFilter === "sold") === !!SOLD[s.id]).forEach(s => {
+    const b = el("button","piece" + (SOLD[s.id] ? " sold" : "")); b.type = "button";
+    const sw = el("div"); paint(sw, s);
+    if (SOLD[s.id]) sw.append(el("span","stamp" + (popId === s.id ? " pop" : ""),"SOLD"));
+    b.append(sw, el("div","name",s.name), el("div","meta", rupees(s.price) + (SOLD[s.id] ? "" : ", 1 piece")));
+    b.addEventListener("click", () => openSaree(s.id));
+    g.append(b);
+  });
+  popId = null;
+}
+
+/* sheet */
+function openSheet(build){ const body = $("#sheet-body"); body.innerHTML = ""; build(body); $("#scrim").classList.add("open"); $("#sheet").classList.add("open"); setTimeout(() => $("#close").focus(), 50); }
+function closeSheet(){ $("#scrim").classList.remove("open"); $("#sheet").classList.remove("open"); }
+$("#close").addEventListener("click", closeSheet); $("#scrim").addEventListener("click", closeSheet);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
+
+function steps(o){
+  const ol = el("ol","steps"); const at = STEPS.indexOf(o.status);
+  STEPS.forEach((st,i) => { const li = el("li", i <= at ? "done" : "", st); ol.append(li); });
+  return ol;
+}
+function details(o, s){
+  const dl = el("dl");
+  const rows = [["Saree", s.name], ["Amount", rupees(s.price)], ["From", o.src === "Website" ? "joyeekolkata.com" : "Store, Harish Mukherjee Road"], ["Ship to", o.place], ["Placed", o.when]];
+  if (o.courier) rows.push(["Courier", o.courier + ", " + o.awb]);
+  rows.forEach(([k,v]) => dl.append(el("dt",null,k), el("dd",null,v)));
+  return dl;
+}
+
+function openOrder(no){
+  const o = orderOf(no), s = sareeOf(o.saree);
+  openSheet(body => {
+    const h = el("h3",null,o.who); h.id = "sheet-title";
+    body.append(h, el("p","sub", o.no + ", " + o.src.toLowerCase() + " order"));
+    const hs = el("div","hero-swatch"); paint(hs, s); body.append(hs);
+    if (o.src === "Store") { body.append(details(o,s), el("div","notice ok","Bought and taken home from the store. The saree was marked sold the moment it was billed.")); return; }
+    body.append(steps(o), details(o,s));
+    const actions = el("div","stack");
+    if (o.status === "Paid"){
+      const b = el("button","btn block","Mark packed"); b.type = "button";
+      b.onclick = () => { o.status = "Packed"; refresh(); openOrder(no); toast("Marked packed. " + o.who + "'s saree is ready to ship.", false); };
+      actions.append(b);
+    } else if (o.status === "Packed"){
+      const f1 = el("label","field","Courier"); const i1 = el("input"); i1.value = intl(o) ? "DHL Express" : "Blue Dart"; i1.autocomplete = "off"; f1.append(i1);
+      const f2 = el("label","field","Tracking number"); const i2 = el("input"); i2.value = String(Math.floor(1e9 + Math.random()*9e9)).replace(/(\d{4})(\d{4})(\d+)/,"$1 $2 $3"); i2.inputMode = "numeric"; f2.append(i2);
+      const b = el("button","btn block","Mark shipped"); b.type = "button";
+      b.onclick = () => { o.courier = i1.value.trim() || "Courier"; o.awb = i2.value.trim() || "N/A"; o.status = "Shipped"; refresh(); openWhatsApp(no, true); };
+      actions.append(f1, f2, b);
+    } else if (o.status === "Shipped"){
+      const w = el("button","btn block wa","Send WhatsApp update"); w.type = "button"; w.onclick = () => openWhatsApp(no, false);
+      const d = el("button","btn block ghost","Mark delivered"); d.type = "button";
+      d.onclick = () => { o.status = "Delivered"; refresh(); openOrder(no); toast("Marked delivered.", false); };
+      actions.append(w, d);
+    } else {
+      actions.append(el("div","notice ok","Delivered. Nothing left to do on this order."));
+    }
+    body.append(actions);
+  });
+}
+
+function message(o){
+  const s = sareeOf(o.saree); const first = o.who.split(" ")[0];
+  return `Hi ${first}, your Joyee saree is on its way 🙏\n\n${s.name}\nCourier: ${o.courier}\nTracking number: ${o.awb}\n\nThank you for shopping with Joyee, Kolkata.`;
+}
+function openWhatsApp(no, justShipped){
+  const o = orderOf(no);
+  openSheet(body => {
+    const h = el("h3",null, justShipped ? "Shipped. Let " + o.who.split(" ")[0] + " know" : "WhatsApp update"); h.id = "sheet-title";
+    body.append(h, el("p","sub","This message goes to the buyer's WhatsApp with one tap."));
+    const wrap = el("div","bubble-wrap"); wrap.append(el("div","bubble", message(o))); body.append(wrap);
+    const a = el("a","btn block wa","Open in WhatsApp"); a.href = "https://wa.me/?text=" + encodeURIComponent(message(o)); a.target = "_blank"; a.rel = "noopener";
+    a.classList.add("linkbtn");
+    const back = el("button","btn block ghost","Back to order"); back.type = "button"; back.onclick = () => openOrder(no);
+    const st = el("div","stack"); st.append(a, back); body.append(st);
+  });
+}
+
+function openSaree(id){
+  const s = sareeOf(id); const soldNo = SOLD[id]; const o = soldNo && orderOf(soldNo);
+  openSheet(body => {
+    const h = el("h3",null,s.name); h.id = "sheet-title";
+    body.append(h, el("p","sub", s.weave + ", " + rupees(s.price)));
+    const hs = el("div","hero-swatch"); paint(hs, s); body.append(hs);
+    if (o){
+      body.append(el("div","notice stop", (o.src === "Website" ? "Already sold online" : "Already sold in the store") + ". Order " + o.no + ", " + o.who + ", " + o.place + "."));
+      const b = el("button","btn block", "Sell in store"); b.type = "button"; b.disabled = true;
+      const v = el("button","btn block ghost","View the order"); v.type = "button"; v.onclick = () => { go("orders"); openOrder(o.no); };
+      const st = el("div","stack"); st.append(b, v); body.append(st);
+    } else {
+      body.append(el("div","notice ok","Available. 1 piece, shown on the website and in the store."));
+      const b = el("button","btn block","Sell in store"); b.type = "button";
+      b.onclick = () => { const no = "JY-" + (seq++); ORDERS.unshift({no, saree:id, who:"Walk-in customer", place:"Harish Mukherjee Road store", src:"Store", status:"Delivered", when:"Just now"}); SOLD[id] = no; popId = id; refresh(); closeSheet(); toast(s.name + " sold in store. It's now off the website too.", false); };
+      body.append(b);
+    }
+  });
+}
+
+function simulate(){
+  const s = SAREES.find(x => !SOLD[x.id]);
+  if (!s) return;
+  const buyer = BUYERS[(seq - 2049) % BUYERS.length];
+  const no = "JY-" + (seq++);
+  ORDERS.unshift({no, saree:s.id, who:buyer.who, place:buyer.place, src:"Website", status:"Paid", when:"Just now"});
+  SOLD[s.id] = no; freshNo = no; popId = s.id;
+  orderFilter = "all"; syncChips();
+  refresh();
+  toast("New website order from " + buyer.who + ". " + s.name + " is now marked sold everywhere.", true);
+  setTimeout(() => { freshNo = null; }, 2500);
+}
+$("#simulate").addEventListener("click", simulate);
+
+let toastTimer;
+function toast(text, withLink){
+  $("#toast-text").textContent = text; $("#toast-btn").hidden = !withLink;
+  $("#toast").classList.add("show"); clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $("#toast").classList.remove("show"), withLink ? 5000 : 2600);
+}
+$("#toast-btn").addEventListener("click", () => { $("#toast").classList.remove("show"); go("stock"); });
+
+function go(view){
+  $("#view-orders").hidden = view !== "orders"; $("#view-stock").hidden = view !== "stock";
+  document.querySelectorAll("nav button").forEach(b => b.dataset.view === view ? b.setAttribute("aria-current","page") : b.removeAttribute("aria-current"));
+  window.scrollTo(0,0);
+}
+document.querySelectorAll("nav button").forEach(b => b.addEventListener("click", () => go(b.dataset.view)));
+
+function syncChips(){
+  document.querySelectorAll("[data-f]").forEach(c => c.setAttribute("aria-pressed", c.dataset.f === orderFilter));
+  document.querySelectorAll("[data-s]").forEach(c => c.setAttribute("aria-pressed", c.dataset.s === stockFilter));
+}
+document.querySelectorAll("[data-f]").forEach(c => c.addEventListener("click", () => { orderFilter = c.dataset.f; syncChips(); renderOrders(); }));
+document.querySelectorAll("[data-s]").forEach(c => c.addEventListener("click", () => { stockFilter = c.dataset.s; syncChips(); renderStock(); }));
+
+function refresh(){
+  renderOrders(); renderStock();
+  const left = SAREES.filter(x => !SOLD[x.id]).length;
+  $("#simulate").disabled = !left;
+  $("#try-text").textContent = left ? "Watch a website order come in." : "Every saree is sold. Reload the page to start again.";
+}
+refresh();
+</script>
+</body>
+</html>
